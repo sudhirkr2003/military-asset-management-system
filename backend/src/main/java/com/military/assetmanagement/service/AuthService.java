@@ -6,6 +6,7 @@ import com.military.assetmanagement.dto.RegisterRequest;
 import com.military.assetmanagement.entity.Base;
 import com.military.assetmanagement.entity.Role;
 import com.military.assetmanagement.entity.User;
+import com.military.assetmanagement.exception.DuplicateResourceException;
 import com.military.assetmanagement.exception.ResourceNotFoundException;
 import com.military.assetmanagement.repository.BaseRepository;
 import com.military.assetmanagement.repository.RoleRepository;
@@ -72,10 +73,10 @@ public class AuthService {
     @Transactional
     public User registerUser(RegisterRequest request, String currentUsername, String ipAddress) {
         if (userRepository.existsByUsername(request.getUsername())) {
-            throw new IllegalArgumentException("Username is already taken");
+            throw new DuplicateResourceException("Username '" + request.getUsername() + "' is already taken.");
         }
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new IllegalArgumentException("Email is already in use");
+            throw new DuplicateResourceException("Email '" + request.getEmail() + "' is already in use.");
         }
 
         Role role = roleRepository.findById(request.getRoleId())

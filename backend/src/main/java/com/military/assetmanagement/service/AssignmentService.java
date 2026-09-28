@@ -3,6 +3,7 @@ package com.military.assetmanagement.service;
 import com.military.assetmanagement.dto.AssignmentRequest;
 import com.military.assetmanagement.entity.*;
 import com.military.assetmanagement.exception.InsufficientAssetException;
+import com.military.assetmanagement.exception.InvalidOperationException;
 import com.military.assetmanagement.exception.ResourceNotFoundException;
 import com.military.assetmanagement.repository.AssetRepository;
 import com.military.assetmanagement.repository.AssignmentRepository;
@@ -64,7 +65,7 @@ public class AssignmentService {
                 .orElseThrow(() -> new ResourceNotFoundException("Assignment not found with id: " + assignmentId));
 
         if ("RETURNED".equals(assignment.getStatus())) {
-            throw new IllegalArgumentException("Assignment is already marked as returned");
+            throw new InvalidOperationException("This assignment has already been returned and cannot be processed again.");
         }
 
         User returnedBy = userRepository.findByUsername(username)
