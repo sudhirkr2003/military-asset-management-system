@@ -37,13 +37,13 @@ export const getErrorMessage = (error, fallbackMessage = 'An unexpected error oc
     }
   }
 
-  // Network / connection errors
+  // Network / connection errors — server is down, not user's fault
   if (error.code === 'ERR_NETWORK' || error.message === 'Network Error') {
-    return 'Unable to connect to the server. Please check your network connection and try again.';
+    return 'Service unavailable. The server is currently unreachable. Please try again later.';
   }
 
   if (error.code === 'ECONNABORTED') {
-    return 'The request timed out. Please check your connection and try again.';
+    return 'The server is taking too long to respond. Please try again later.';
   }
 
   return fallbackMessage;
