@@ -14,12 +14,20 @@ import AssignmentsExpenditures from './pages/AssignmentsExpenditures';
 import Docs from './pages/Docs';
 
 const MainLayout = ({ children }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
   return (
     <div className="min-h-screen bg-slate-50 bg-tactical-grid text-slate-900 flex flex-col">
-      <Navbar />
-      <div className="flex flex-1">
-        <Sidebar />
-        <main className="flex-1 p-6 overflow-y-auto max-w-7xl mx-auto w-full">
+      <Navbar 
+        onToggleMobileMenu={() => setIsMobileMenuOpen(prev => !prev)} 
+        isMobileMenuOpen={isMobileMenuOpen} 
+      />
+      <div className="flex flex-1 relative">
+        <Sidebar 
+          isOpen={isMobileMenuOpen} 
+          onClose={() => setIsMobileMenuOpen(false)} 
+        />
+        <main className="flex-1 p-3 sm:p-5 md:p-6 overflow-y-auto max-w-7xl mx-auto w-full transition-all">
           {children}
         </main>
       </div>

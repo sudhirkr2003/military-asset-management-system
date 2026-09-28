@@ -82,25 +82,25 @@ const Dashboard = () => {
         </div>
       )}
       {/* Top Banner & Filters */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 glass-panel p-5 rounded-2xl border border-slate-800">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4 glass-panel p-4 sm:p-5 rounded-2xl border border-slate-200">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
+          <h2 className="text-lg sm:text-xl font-bold text-slate-900 flex flex-wrap items-center gap-2">
             Logistics Overview Dashboard
-            <span className="px-2 py-0.5 text-xs font-mono font-semibold rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+            <span className="px-2 py-0.5 text-xs font-mono font-semibold rounded bg-emerald-100 text-emerald-700 border border-emerald-300">
               Live Stock Feed
             </span>
           </h2>
-          <p className="text-xs text-slate-400 mt-1">Real-time inventory movement, transfers, and balance audits across military bases.</p>
+          <p className="text-xs text-slate-500 mt-0.5 sm:mt-1">Real-time inventory movement, transfers, and balance audits across military bases.</p>
         </div>
 
         {/* Filter Controls */}
-        <div className="flex flex-wrap items-center gap-2.5">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-2.5 w-full lg:w-auto">
           {/* Base Filter */}
-          <div className="relative">
+          <div className="relative w-full sm:w-auto">
             <select
               value={selectedBase}
               onChange={(e) => setSelectedBase(e.target.value)}
-              className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-medium"
+              className="w-full sm:w-auto bg-slate-50 border border-slate-300 rounded-xl px-2.5 sm:px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-indigo-500 font-medium"
             >
               <option value="">All Bases (HQ)</option>
               {bases.map((b) => (
@@ -110,11 +110,11 @@ const Dashboard = () => {
           </div>
 
           {/* Equipment Filter */}
-          <div className="relative">
+          <div className="relative w-full sm:w-auto">
             <select
               value={selectedEquipment}
               onChange={(e) => setSelectedEquipment(e.target.value)}
-              className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-medium"
+              className="w-full sm:w-auto bg-slate-50 border border-slate-300 rounded-xl px-2.5 sm:px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-indigo-500 font-medium"
             >
               <option value="">All Equipment</option>
               {equipmentTypes.map((e) => (
@@ -128,14 +128,14 @@ const Dashboard = () => {
             type="date"
             value={fromDate}
             onChange={(e) => setFromDate(e.target.value)}
-            className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-medium"
+            className="w-full sm:w-auto bg-slate-50 border border-slate-300 rounded-xl px-2.5 sm:px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-indigo-500 font-medium"
             placeholder="From"
           />
           <input
             type="date"
             value={toDate}
             onChange={(e) => setToDate(e.target.value)}
-            className="bg-slate-950 border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 font-medium"
+            className="w-full sm:w-auto bg-slate-50 border border-slate-300 rounded-xl px-2.5 sm:px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-indigo-500 font-medium"
             placeholder="To"
           />
         </div>
@@ -248,56 +248,56 @@ const Dashboard = () => {
           </div>
 
           {/* Charts Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             {/* Inventory Movement Trend Line Chart */}
-            <div className="glass-panel p-5 rounded-2xl border border-slate-800">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-bold text-slate-200 flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4 text-indigo-400" />
+            <div className="glass-panel p-4 sm:p-5 rounded-2xl border border-slate-200">
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
+                <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5 sm:gap-2">
+                  <TrendingUp className="w-4 h-4 text-indigo-600" />
                   Inventory Movement Trends
                 </h3>
-                <span className="text-[11px] text-slate-400 font-mono">Daily Inflow / Outflow</span>
+                <span className="text-[10px] sm:text-[11px] text-slate-500 font-mono">Daily Inflow / Outflow</span>
               </div>
-              <div className="h-72 w-full">
+              <div className="h-60 sm:h-72 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={data.movementTrends}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                     <XAxis dataKey="date" stroke="#64748b" tick={{ fontSize: 11 }} />
                     <YAxis stroke="#64748b" tick={{ fontSize: 11 }} />
                     <Tooltip 
-                      contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: '12px', fontSize: '12px' }} 
+                      contentStyle={{ backgroundColor: '#ffffff', borderColor: '#cbd5e1', borderRadius: '12px', fontSize: '12px', color: '#0f172a', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }} 
                     />
-                    <Legend wrapperStyle={{ fontSize: '12px' }} />
-                    <Line type="monotone" dataKey="purchases" stroke="#10b981" strokeWidth={2.5} name="Purchases" dot={{ r: 4 }} />
-                    <Line type="monotone" dataKey="transfers" stroke="#6366f1" strokeWidth={2.5} name="Transfers" dot={{ r: 4 }} />
-                    <Line type="monotone" dataKey="expenditures" stroke="#f43f5e" strokeWidth={2.5} name="Expenditures" dot={{ r: 4 }} />
+                    <Legend wrapperStyle={{ fontSize: '11px' }} />
+                    <Line type="monotone" dataKey="purchases" stroke="#10b981" strokeWidth={2.5} name="Purchases" dot={{ r: 3 }} />
+                    <Line type="monotone" dataKey="transfers" stroke="#6366f1" strokeWidth={2.5} name="Transfers" dot={{ r: 3 }} />
+                    <Line type="monotone" dataKey="expenditures" stroke="#f43f5e" strokeWidth={2.5} name="Expenditures" dot={{ r: 3 }} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
             </div>
 
             {/* Base Inventory Distribution Bar Chart */}
-            <div className="glass-panel p-5 rounded-2xl border border-slate-800">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-bold text-slate-200 flex items-center gap-2">
-                  <Building2 className="w-4 h-4 text-emerald-400" />
+            <div className="glass-panel p-4 sm:p-5 rounded-2xl border border-slate-200">
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
+                <h3 className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5 sm:gap-2">
+                  <Building2 className="w-4 h-4 text-emerald-600" />
                   Base Stock Levels Breakdown
                 </h3>
-                <span className="text-[11px] text-slate-400 font-mono">Available vs Assigned</span>
+                <span className="text-[10px] sm:text-[11px] text-slate-500 font-mono">Available vs Assigned</span>
               </div>
-              <div className="h-72 w-full">
+              <div className="h-60 sm:h-72 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={data.baseSummaries}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                     <XAxis dataKey="baseName" stroke="#64748b" tick={{ fontSize: 11 }} />
                     <YAxis stroke="#64748b" tick={{ fontSize: 11 }} />
                     <Tooltip 
-                      contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: '12px', fontSize: '12px' }} 
+                      contentStyle={{ backgroundColor: '#ffffff', borderColor: '#cbd5e1', borderRadius: '12px', fontSize: '12px', color: '#0f172a', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }} 
                     />
-                    <Legend wrapperStyle={{ fontSize: '12px' }} />
-                    <Bar dataKey="availableQuantity" fill="#10b981" name="Available Stock" radius={[6, 6, 0, 0]} />
-                    <Bar dataKey="assignedQuantity" fill="#f59e0b" name="Assigned" radius={[6, 6, 0, 0]} />
-                    <Bar dataKey="expendedQuantity" fill="#f43f5e" name="Expended" radius={[6, 6, 0, 0]} />
+                    <Legend wrapperStyle={{ fontSize: '11px' }} />
+                    <Bar dataKey="availableQuantity" fill="#10b981" name="Available Stock" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="assignedQuantity" fill="#f59e0b" name="Assigned" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="expendedQuantity" fill="#f43f5e" name="Expended" radius={[4, 4, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>

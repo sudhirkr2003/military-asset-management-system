@@ -191,20 +191,20 @@ const AssignmentsExpenditures = ({ initialTab = 'assignments' }) => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header & Section Switcher */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-950/80 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 bg-white dark:bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
         <div>
-          <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
             <Layers className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-            Assignments & Expenditures Management
+            Assignments &amp; Expenditures Management
           </h2>
-          <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 font-semibold">
+          <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 sm:mt-1 font-semibold">
             Assign assets to military personnel and record operational expenditures.
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
           {canAssignAssets(user) && (
             <button
               onClick={() => {
@@ -217,7 +217,7 @@ const AssignmentsExpenditures = ({ initialTab = 'assignments' }) => {
                 });
                 setIsAssignModalOpen(true);
               }}
-              className="px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-extrabold uppercase tracking-wider shadow-md shadow-amber-600/20 flex items-center gap-1.5 transition-all"
+              className="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-extrabold uppercase tracking-wider shadow-md shadow-amber-600/20 flex items-center gap-1.5 transition-all shrink-0"
             >
               <Plus className="w-4 h-4" />
               Assign Asset
@@ -235,7 +235,7 @@ const AssignmentsExpenditures = ({ initialTab = 'assignments' }) => {
                 });
                 setIsExpendModalOpen(true);
               }}
-              className="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-extrabold uppercase tracking-wider shadow-md shadow-rose-600/20 flex items-center gap-1.5 transition-all"
+              className="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-extrabold uppercase tracking-wider shadow-md shadow-rose-600/20 flex items-center gap-1.5 transition-all shrink-0"
             >
               <Plus className="w-4 h-4" />
               Record Expenditure
@@ -245,7 +245,7 @@ const AssignmentsExpenditures = ({ initialTab = 'assignments' }) => {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 font-semibold text-xs">
+      <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 font-semibold text-xs">
         <button
           onClick={() => setActiveTab('assignments')}
           className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
@@ -312,7 +312,7 @@ const AssignmentsExpenditures = ({ initialTab = 'assignments' }) => {
             </select>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-400 uppercase font-mono mb-1">Personnel Full Name</label>
               <input
@@ -338,7 +338,7 @@ const AssignmentsExpenditures = ({ initialTab = 'assignments' }) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-400 uppercase font-mono mb-1">Quantity</label>
               <input
@@ -407,7 +407,7 @@ const AssignmentsExpenditures = ({ initialTab = 'assignments' }) => {
             </select>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-400 uppercase font-mono mb-1">Quantity Expended</label>
               <input

@@ -123,15 +123,15 @@ const Purchases = () => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 glass-panel p-5 rounded-2xl border border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 glass-panel p-4 sm:p-5 rounded-2xl border border-slate-200">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-            <ShoppingBag className="w-5 h-5 text-emerald-400" />
+          <h2 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+            <ShoppingBag className="w-5 h-5 text-emerald-600" />
             Asset Purchases & Acquisitions
           </h2>
-          <p className="text-xs text-slate-400 mt-1">Track procurement of military equipment and vendor purchase orders.</p>
+          <p className="text-xs text-slate-500 mt-0.5 sm:mt-1">Track procurement of military equipment and vendor purchase orders.</p>
         </div>
 
         {canManagePurchases(user) && (
@@ -147,7 +147,7 @@ const Purchases = () => {
               });
               setIsModalOpen(true);
             }}
-            className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white text-xs font-semibold uppercase tracking-wider shadow-lg shadow-emerald-600/30 flex items-center gap-2 transition-all"
+            className="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white text-xs font-semibold uppercase tracking-wider shadow-lg shadow-emerald-600/20 flex items-center gap-2 transition-all shrink-0"
           >
             <Plus className="w-4 h-4" />
             Record Purchase
@@ -168,19 +168,19 @@ const Purchases = () => {
       {/* Record Purchase Modal */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Record New Purchase Transaction">
         {error && (
-          <div className="mb-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs">
+          <div className="mb-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 text-xs">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-400 uppercase font-mono mb-1">Target Base</label>
+              <label className="block text-xs font-semibold text-slate-600 uppercase font-mono mb-1">Target Base</label>
               <select
                 value={formData.baseId}
                 onChange={(e) => setFormData({ ...formData, baseId: e.target.value })}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
+                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-indigo-500"
                 required
               >
                 {bases.map(b => (
@@ -190,11 +190,11 @@ const Purchases = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-400 uppercase font-mono mb-1">Equipment Type</label>
+              <label className="block text-xs font-semibold text-slate-600 uppercase font-mono mb-1">Equipment Type</label>
               <select
                 value={formData.equipmentTypeId}
                 onChange={(e) => setFormData({ ...formData, equipmentTypeId: e.target.value })}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500"
+                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-indigo-500"
                 required
               >
                 {equipmentTypes.map(e => (
@@ -204,7 +204,7 @@ const Purchases = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
               <label className="block text-xs font-semibold text-slate-400 uppercase font-mono mb-1">Quantity</label>
               <input

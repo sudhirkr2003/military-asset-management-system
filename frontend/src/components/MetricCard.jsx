@@ -13,37 +13,39 @@ const MetricCard = ({ title, value, subtext, icon: Icon, badgeText, badgeColor =
 
   const getBadgeStyle = (color) => {
     switch (color) {
-      case 'emerald': return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30';
-      case 'amber': return 'bg-amber-500/10 text-amber-400 border-amber-500/30';
-      case 'rose': return 'bg-rose-500/10 text-rose-400 border-rose-500/30';
-      case 'cyan': return 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30';
-      default: return 'bg-indigo-500/10 text-indigo-400 border-indigo-500/30';
+      case 'emerald': return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+      case 'amber': return 'bg-amber-50 text-amber-700 border-amber-200';
+      case 'rose': return 'bg-rose-50 text-rose-700 border-rose-200';
+      case 'cyan': return 'bg-cyan-50 text-cyan-700 border-cyan-200';
+      default: return 'bg-indigo-50 text-indigo-700 border-indigo-200';
     }
   };
 
   return (
     <div 
       onClick={onClick}
-      className={`glass-panel p-5 rounded-2xl transition-all duration-300 border border-slate-800/80 shadow-xl ${getGlow(glowColor)} ${onClick ? 'cursor-pointer transform hover:-translate-y-1' : ''}`}
+      className={`glass-panel p-4 sm:p-5 rounded-2xl transition-all duration-300 border border-slate-200 shadow-sm ${getGlow(glowColor)} ${onClick ? 'cursor-pointer transform hover:-translate-y-1' : ''}`}
     >
-      <div className="flex items-start justify-between">
-        <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">{title}</span>
-          <div className="text-2xl font-bold font-mono text-slate-100 mt-1">
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 truncate block">
+            {title}
+          </span>
+          <div className="text-xl sm:text-2xl font-bold font-mono text-slate-900 mt-0.5 sm:mt-1 truncate">
             {typeof value === 'number' ? value.toLocaleString() : value}
           </div>
         </div>
         {Icon && (
-          <div className={`p-2.5 rounded-xl border ${getBadgeStyle(badgeColor)}`}>
-            <Icon className="w-5 h-5" />
+          <div className={`p-2 sm:p-2.5 rounded-xl border shrink-0 ${getBadgeStyle(badgeColor)}`}>
+            <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
         )}
       </div>
 
-      <div className="mt-3 flex items-center justify-between text-xs text-slate-400">
-        <span>{subtext}</span>
+      <div className="mt-2.5 sm:mt-3 flex items-center justify-between gap-2 text-[11px] sm:text-xs text-slate-500">
+        <span className="truncate">{subtext}</span>
         {badgeText && (
-          <span className={`px-2 py-0.5 font-mono text-[10px] font-semibold rounded-full border ${getBadgeStyle(badgeColor)}`}>
+          <span className={`px-1.5 sm:px-2 py-0.5 font-mono text-[9px] sm:text-[10px] font-semibold rounded-full border shrink-0 ${getBadgeStyle(badgeColor)}`}>
             {badgeText}
           </span>
         )}
