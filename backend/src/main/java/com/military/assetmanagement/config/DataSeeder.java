@@ -36,6 +36,36 @@ public class DataSeeder implements CommandLineRunner {
             roleRepository.save(Role.builder().name(RoleName.BASE_COMMANDER).build());
             roleRepository.save(Role.builder().name(RoleName.LOGISTICS_OFFICER).build());
         }
-        log.info("DataSeeder completed (auto-dummy data insertion is disabled).");
+
+        if (userRepository.count() == 0) {
+            log.info("Initializing default admin account for local development...");
+            Role adminRole = roleRepository.findByName(RoleName.ADMIN).orElse(null);
+            userRepository.save(User.builder()
+                    .username("admin")
+                    .password(passwordEncoder.encode("Admin@123"))
+                    .email("admin@military.gov")
+                    .fullName("Commander In Chief")
+                    .role(adminRole)
+                    .enabled(true)
+                    .build());
+        }
+
+        if (baseRepository.count() == 0) {
+            log.info("Initializing default bases...");
+            baseRepository.save(Base.builder().name("Northern Command Base").code("NC-01").location("Udhampur Tactical Sector").build());
+            baseRepository.save(Base.builder().name("Western Air Command").code("WAC-02").location("Ambala Air Station").build());
+            baseRepository.save(Base.builder().name("Eastern Naval Command").code("ENC-03").location("Visakhapatnam Dockyard").build());
+        }
+
+        if (equipmentTypeRepository.count() == 0) {
+            log.info("Initializing default equipment types...");
+            equipmentTypeRepository.save(EquipmentType.builder().name("Tactical Transport Vehicle").category("Vehicle").unit("Units").description("Armored multi-purpose transport vehicle").build());
+            equipmentTypeRepository.save(EquipmentType.builder().name("Standard Assault Rifle").category("Weapon").unit("Units").description("5.56mm service rifle").build());
+            equipmentTypeRepository.save(EquipmentType.builder().name("5.56mm Ammunition").category("Ammunition").unit("Rounds").description("Standard NATO cartridge").build());
+            equipmentTypeRepository.save(EquipmentType.builder().name("Encrypted VHF Radio").category("Communication Equipment").unit("Sets").description("Secure tactical radio transceiver").build());
+            equipmentTypeRepository.save(EquipmentType.builder().name("Field Trauma Kit").category("Medical Equipment").unit("Kits").description("Emergency medical responder pack").build());
+        }
+
+        log.info("DataSeeder completed.");
     }
 }
