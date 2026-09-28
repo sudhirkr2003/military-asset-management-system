@@ -214,7 +214,7 @@
     </div>
     <div class="meta-item">
       <strong>GitHub Repository</strong>
-      <span style="font-family: 'JetBrains Mono'; font-size: 8pt;">github.com/sudhirkr2003/military-asset-management-system</span>
+      <span style="font-family: 'JetBrains Mono'; font-size: 8pt;"><a href="https://github.com/sudhirkr2003/military-asset-management-system" style="color: #4f46e5; text-decoration: none;">https://github.com/sudhirkr2003/military-asset-management-system</a></span>
     </div>
     <div class="meta-item">
       <strong>Live Frontend URL</strong>
@@ -453,11 +453,16 @@
 <!-- SECTION 6: SETUP INSTRUCTIONS -->
 <h2>6. Setup Instructions</h2>
 
-<h3>6.1 Prerequisites</h3>
+<h3>6.1 Clone & Prerequisites</h3>
+<pre>
+git clone https://github.com/sudhirkr2003/military-asset-management-system.git
+cd military-asset-management-system
+</pre>
 <ul>
   <li>Java Development Kit (JDK) 17+ installed</li>
   <li>Apache Maven 3.9+</li>
   <li>Node.js 18+ and npm</li>
+  <li>PostgreSQL 14+ database instance (or Supabase Cloud instance)</li>
 </ul>
 
 <h3>6.2 Running the Backend</h3>
@@ -466,7 +471,7 @@ cd backend
 mvn clean compile
 mvn spring-boot:run
 </pre>
-<p><em>Backend server starts on <code>http://localhost:8080</code>. Initial roles, bases, equipment types, stock balances, and test accounts are auto-populated by <code>DataSeeder.java</code>.</em></p>
+<p><em>Backend server starts on <code>http://localhost:8080</code>. Initial schema and tactical base data are provided via <code>database_dump.sql</code>.</em></p>
 
 <h3>6.3 Running the Frontend</h3>
 <pre>

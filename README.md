@@ -20,6 +20,7 @@ A defense-grade, role-based logistics command and inventory control platform des
 | **Health Check (Uptime)** | Public Endpoint | [Backend Health Endpoint](https://military-asset-management-system-backend-rx1w.onrender.com/api/health) |
 | **API Specification** | JSON Endpoint | [API Documentation Docs](https://military-asset-management-system-backend-rx1w.onrender.com/api/docs) |
 | **Database** | Supabase Cloud | PostgreSQL with IPv4 Session Pooler |
+| **GitHub Repository** | Source Code | [https://github.com/sudhirkr2003/military-asset-management-system](https://github.com/sudhirkr2003/military-asset-management-system) |
 
 > ⚠️ **Important Cloud Hosting Notice (Render Free Tier Cold-Start)**:  
 > The backend service is hosted on Render's free tier. After 15 minutes of inactivity, the instance automatically spins down into a sleep state. The first inbound request (e.g. initial login) may take **1 to 2 minutes** to wake up the server container. Subsequent requests will respond with standard fast latency.
