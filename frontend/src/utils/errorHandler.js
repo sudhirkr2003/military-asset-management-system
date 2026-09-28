@@ -39,7 +39,7 @@ export const getErrorMessage = (error, fallbackMessage = 'An unexpected error oc
 
   // Network / connection errors — server is down, not user's fault
   if (error.code === 'ERR_NETWORK' || error.message === 'Network Error') {
-    return 'Service unavailable. The server is currently unreachable. Please try again later.';
+    return '503 — Service Unavailable. The backend server is not running or unreachable. Please contact the administrator.';
   }
 
   if (error.code === 'ECONNABORTED') {
