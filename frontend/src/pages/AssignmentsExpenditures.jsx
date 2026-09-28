@@ -191,16 +191,16 @@ const AssignmentsExpenditures = ({ initialTab = 'assignments' }) => {
   ];
 
   return (
-    <div className="space-y-4 sm:space-y-6">
-      {/* Header & Section Switcher */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 bg-white dark:bg-slate-950/80 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+    <div className="space-y-4">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3.5 sm:p-4 rounded-xl border border-slate-200 shadow-sm transition-colors">
         <div>
-          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-            <Layers className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-            Assignments &amp; Expenditures Management
+          <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+            <Layers className="w-4 h-4 text-indigo-600" />
+            Assignments &amp; Expenditures
           </h2>
-          <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 sm:mt-1 font-semibold">
-            Assign assets to military personnel and record operational expenditures.
+          <p className="text-xs text-slate-500 mt-0.5">
+            Deploy assets to personnel and record operational expenditures.
           </p>
         </div>
 
@@ -217,9 +217,9 @@ const AssignmentsExpenditures = ({ initialTab = 'assignments' }) => {
                 });
                 setIsAssignModalOpen(true);
               }}
-              className="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-extrabold uppercase tracking-wider shadow-md shadow-amber-600/20 flex items-center gap-1.5 transition-all shrink-0"
+              className="w-full sm:w-auto justify-center px-3.5 py-2 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-all shrink-0"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-3.5 h-3.5" />
               Assign Asset
             </button>
           )}
@@ -235,9 +235,9 @@ const AssignmentsExpenditures = ({ initialTab = 'assignments' }) => {
                 });
                 setIsExpendModalOpen(true);
               }}
-              className="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-extrabold uppercase tracking-wider shadow-md shadow-rose-600/20 flex items-center gap-1.5 transition-all shrink-0"
+              className="w-full sm:w-auto justify-center px-3.5 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-all shrink-0"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-3.5 h-3.5" />
               Record Expenditure
             </button>
           )}
@@ -245,28 +245,28 @@ const AssignmentsExpenditures = ({ initialTab = 'assignments' }) => {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2 font-semibold text-xs">
+      <div className="flex flex-wrap items-center gap-1.5 border-b border-slate-200 pb-2 text-xs">
         <button
           onClick={() => setActiveTab('assignments')}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold transition-all ${
             activeTab === 'assignments'
-              ? 'bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/40 font-bold shadow-sm'
-              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
+              ? 'bg-amber-50 text-amber-900 border border-amber-300 shadow-xs'
+              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
           }`}
         >
-          <UserCheck className="w-4 h-4" />
+          <UserCheck className="w-3.5 h-3.5" />
           <span>Personnel Assignments ({assignments.length})</span>
         </button>
 
         <button
           onClick={() => setActiveTab('expenditures')}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold transition-all ${
             activeTab === 'expenditures'
-              ? 'bg-rose-500/15 text-rose-700 dark:text-rose-400 border border-rose-500/40 font-bold shadow-sm'
-              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
+              ? 'bg-rose-50 text-rose-900 border border-rose-300 shadow-xs'
+              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
           }`}
         >
-          <Flame className="w-4 h-4" />
+          <Flame className="w-3.5 h-3.5" />
           <span>Expended Assets ({expenditures.length})</span>
         </button>
       </div>

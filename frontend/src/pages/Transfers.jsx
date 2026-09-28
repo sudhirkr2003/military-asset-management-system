@@ -104,16 +104,16 @@ const Transfers = () => {
   };
 
   return (
-    <div className="space-y-4 sm:space-y-6">
+    <div className="space-y-4">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 glass-panel p-4 sm:p-5 rounded-2xl border border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 glass-panel p-3.5 sm:p-4 rounded-xl border border-slate-200">
         <div>
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
-            <ArrowRightLeft className="w-5 h-5 text-indigo-600" />
-            Inter-Base Asset Transfers
+          <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+            <ArrowRightLeft className="w-4 h-4 text-indigo-600" />
+            Inter-Base Transfers
           </h2>
-          <p className="text-xs text-slate-500 mt-0.5 sm:mt-1">
-            Reallocate inventory stock between bases with automated transactional stock adjustments.
+          <p className="text-xs text-slate-500 mt-0.5">
+            Transfer inventory stock between command bases.
           </p>
         </div>
 
@@ -130,9 +130,9 @@ const Transfers = () => {
               });
               setIsModalOpen(true);
             }}
-            className="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white text-xs font-semibold uppercase tracking-wider shadow-lg shadow-indigo-600/20 flex items-center gap-2 transition-all shrink-0"
+            className="w-full sm:w-auto justify-center px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-all shrink-0"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-3.5 h-3.5" />
             Create Transfer
           </button>
         )}

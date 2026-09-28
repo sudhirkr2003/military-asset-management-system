@@ -74,33 +74,30 @@ const Dashboard = () => {
   }, [selectedBase, selectedEquipment, fromDate, toDate]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {error && (
-        <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-semibold flex items-center gap-2.5">
+        <div className="p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold flex items-center gap-2">
           <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
           <span>{error}</span>
         </div>
       )}
       {/* Top Banner & Filters */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4 glass-panel p-4 sm:p-5 rounded-2xl border border-slate-200">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 glass-panel p-4 rounded-xl border border-slate-200">
         <div>
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900 flex flex-wrap items-center gap-2">
-            Logistics Overview Dashboard
-            <span className="px-2 py-0.5 text-xs font-mono font-semibold rounded bg-emerald-100 text-emerald-700 border border-emerald-300">
-              Live Stock Feed
-            </span>
+          <h2 className="text-lg font-bold text-slate-900">
+            Logistics Overview
           </h2>
-          <p className="text-xs text-slate-500 mt-0.5 sm:mt-1">Real-time inventory movement, transfers, and balance audits across military bases.</p>
+          <p className="text-xs text-slate-500 mt-0.5">Inventory balances, transfers, and command stock levels.</p>
         </div>
 
         {/* Filter Controls */}
-        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-2.5 w-full lg:w-auto">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 w-full lg:w-auto">
           {/* Base Filter */}
           <div className="relative w-full sm:w-auto">
             <select
               value={selectedBase}
               onChange={(e) => setSelectedBase(e.target.value)}
-              className="w-full sm:w-auto bg-slate-50 border border-slate-300 rounded-xl px-2.5 sm:px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-indigo-500 font-medium"
+              className="w-full sm:w-auto bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-indigo-500 font-medium"
             >
               <option value="">All Bases (HQ)</option>
               {bases.map((b) => (
@@ -114,7 +111,7 @@ const Dashboard = () => {
             <select
               value={selectedEquipment}
               onChange={(e) => setSelectedEquipment(e.target.value)}
-              className="w-full sm:w-auto bg-slate-50 border border-slate-300 rounded-xl px-2.5 sm:px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-indigo-500 font-medium"
+              className="w-full sm:w-auto bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-indigo-500 font-medium"
             >
               <option value="">All Equipment</option>
               {equipmentTypes.map((e) => (
@@ -128,14 +125,14 @@ const Dashboard = () => {
             type="date"
             value={fromDate}
             onChange={(e) => setFromDate(e.target.value)}
-            className="w-full sm:w-auto bg-slate-50 border border-slate-300 rounded-xl px-2.5 sm:px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-indigo-500 font-medium"
+            className="w-full sm:w-auto bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-indigo-500 font-medium"
             placeholder="From"
           />
           <input
             type="date"
             value={toDate}
             onChange={(e) => setToDate(e.target.value)}
-            className="w-full sm:w-auto bg-slate-50 border border-slate-300 rounded-xl px-2.5 sm:px-3 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-indigo-500 font-medium"
+            className="w-full sm:w-auto bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs text-slate-900 focus:outline-none focus:border-indigo-500 font-medium"
             placeholder="To"
           />
         </div>
@@ -145,15 +142,14 @@ const Dashboard = () => {
         <LoadingSpinner />
       ) : data ? (
         <>
-          {/* Section 21 Dashboard Grid Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* Dashboard Metrics Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {/* Opening Balance */}
             <MetricCard
               title="Opening Balance"
               value={data.openingBalance}
-              subtext="Inventory at start of period"
+              subtext="At start of period"
               icon={Layers}
-              badgeText="PERIOD START"
               badgeColor="cyan"
               glowColor="cyan"
             />
@@ -162,9 +158,9 @@ const Dashboard = () => {
             <MetricCard
               title="Purchases"
               value={`+${data.purchases.toLocaleString()}`}
-              subtext="Acquisitions from vendors"
+              subtext="Acquisitions"
               icon={ShoppingBag}
-              badgeText="INFLOW"
+              badgeText="Inflow"
               badgeColor="emerald"
               glowColor="emerald"
             />
@@ -173,9 +169,9 @@ const Dashboard = () => {
             <MetricCard
               title="Transfer In"
               value={`+${data.transferIn.toLocaleString()}`}
-              subtext="Received from other bases"
+              subtext="Received from bases"
               icon={ArrowDownLeft}
-              badgeText="INFLOW"
+              badgeText="Inflow"
               badgeColor="indigo"
               glowColor="indigo"
             />
@@ -184,20 +180,20 @@ const Dashboard = () => {
             <MetricCard
               title="Transfer Out"
               value={`-${data.transferOut.toLocaleString()}`}
-              subtext="Dispatched to other bases"
+              subtext="Dispatched to bases"
               icon={ArrowUpRight}
-              badgeText="OUTFLOW"
+              badgeText="Outflow"
               badgeColor="rose"
               glowColor="rose"
             />
 
-            {/* Net Movement Card - CLICKABLE POPUP (Section 22) */}
+            {/* Net Movement Card - CLICKABLE POPUP */}
             <MetricCard
               title="Net Movement"
               value={data.netMovement >= 0 ? `+${data.netMovement.toLocaleString()}` : data.netMovement.toLocaleString()}
-              subtext="Click to view breakdown popup"
+              subtext="Click to view breakdown"
               icon={ArrowRightLeft}
-              badgeText="CLICK FOR DETAILS"
+              badgeText={data.netMovement >= 0 ? "+Net" : "-Net"}
               badgeColor={data.netMovement >= 0 ? "emerald" : "rose"}
               glowColor={data.netMovement >= 0 ? "emerald" : "rose"}
               onClick={() => setIsNetMovementModalOpen(true)}
@@ -207,9 +203,9 @@ const Dashboard = () => {
             <MetricCard
               title="Assigned Stock"
               value={data.assignedQuantity}
-              subtext="Currently deployed with personnel"
+              subtext="Issued to personnel"
               icon={UserCheck}
-              badgeText="DEPLOYED"
+              badgeText="Assigned"
               badgeColor="amber"
               glowColor="amber"
             />
@@ -218,30 +214,30 @@ const Dashboard = () => {
             <MetricCard
               title="Expended"
               value={data.expendedQuantity}
-              subtext="Consumed during operations"
+              subtext="Consumed in operations"
               icon={Flame}
-              badgeText="CONSUMED"
+              badgeText="Expended"
               badgeColor="rose"
               glowColor="rose"
             />
 
             {/* Closing Balance */}
-            <div className="glass-panel p-5 rounded-2xl border border-indigo-500/40 bg-gradient-to-br from-indigo-950/60 to-slate-900 shadow-2xl glow-indigo">
+            <div className="p-4 sm:p-5 rounded-xl border border-indigo-200 bg-indigo-50/70 shadow-sm">
               <div className="flex items-start justify-between">
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-indigo-300">Closing Balance</span>
-                  <div className="text-3xl font-extrabold font-mono text-white mt-1">
+                  <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-indigo-900">Closing Balance</span>
+                  <div className="text-xl sm:text-2xl font-bold font-mono text-indigo-950 mt-0.5 sm:mt-1">
                     {data.closingBalance.toLocaleString()}
                   </div>
                 </div>
-                <div className="p-2.5 rounded-xl bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
-                  <Sparkles className="w-5 h-5 animate-pulse" />
+                <div className="p-2 rounded-lg bg-indigo-100 text-indigo-700">
+                  <Sparkles className="w-4 h-4" />
                 </div>
               </div>
-              <div className="mt-3 flex items-center justify-between text-xs text-indigo-200">
-                <span>Current Total Active Inventory</span>
-                <span className="px-2 py-0.5 font-mono text-[10px] font-bold rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                  VERIFIED
+              <div className="mt-2.5 flex items-center justify-between text-[11px] sm:text-xs text-indigo-700">
+                <span>Active Inventory</span>
+                <span className="px-1.5 py-0.5 font-mono text-[9px] font-bold rounded bg-indigo-100 text-indigo-800 border border-indigo-200">
+                  Verified
                 </span>
               </div>
             </div>

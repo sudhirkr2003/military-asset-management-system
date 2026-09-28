@@ -123,15 +123,15 @@ const Purchases = () => {
   ];
 
   return (
-    <div className="space-y-4 sm:space-y-6">
+    <div className="space-y-4">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 glass-panel p-4 sm:p-5 rounded-2xl border border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 glass-panel p-3.5 sm:p-4 rounded-xl border border-slate-200">
         <div>
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
-            <ShoppingBag className="w-5 h-5 text-emerald-600" />
-            Asset Purchases & Acquisitions
+          <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+            <ShoppingBag className="w-4 h-4 text-emerald-600" />
+            Purchases &amp; Acquisitions
           </h2>
-          <p className="text-xs text-slate-500 mt-0.5 sm:mt-1">Track procurement of military equipment and vendor purchase orders.</p>
+          <p className="text-xs text-slate-500 mt-0.5">Procurement records and purchase orders.</p>
         </div>
 
         {canManagePurchases(user) && (
@@ -147,9 +147,9 @@ const Purchases = () => {
               });
               setIsModalOpen(true);
             }}
-            className="w-full sm:w-auto justify-center px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white text-xs font-semibold uppercase tracking-wider shadow-lg shadow-emerald-600/20 flex items-center gap-2 transition-all shrink-0"
+            className="w-full sm:w-auto justify-center px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-all shrink-0"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-3.5 h-3.5" />
             Record Purchase
           </button>
         )}

@@ -27,7 +27,7 @@ const MainLayout = ({ children }) => {
           isOpen={isMobileMenuOpen} 
           onClose={() => setIsMobileMenuOpen(false)} 
         />
-        <main className="flex-1 p-3 sm:p-5 md:p-6 overflow-y-auto max-w-7xl mx-auto w-full transition-all">
+        <main className="flex-1 p-3 sm:p-4 md:p-5 overflow-y-auto max-w-7xl mx-auto w-full transition-all">
           {children}
         </main>
       </div>
