@@ -28,24 +28,9 @@ const Login = () => {
 
   return (
     <div 
-      style={{ backgroundColor: isDark ? '#0b0f19' : '#ffffff' }}
-      className="min-h-screen bg-tactical-grid flex items-center justify-center p-4 relative overflow-hidden transition-colors"
+      style={{ backgroundColor: '#f8fafc' }}
+      className="min-h-screen bg-tactical-grid flex items-center justify-center p-4 relative overflow-hidden"
     >
-      {/* Top Right Theme Toggle */}
-      <div className="absolute top-4 right-4 z-20">
-        <button
-          onClick={toggleTheme}
-          style={{ 
-            backgroundColor: isDark ? '#0f172a' : '#f1f5f9',
-            borderColor: isDark ? '#1e293b' : '#cbd5e1',
-            color: isDark ? '#fbbf24' : '#4f46e5'
-          }}
-          className="p-2.5 rounded-xl border transition-colors shadow-sm"
-          title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-        >
-          {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-        </button>
-      </div>
 
       <div className="w-full max-w-md relative z-10">
         {/* Header Branding */}

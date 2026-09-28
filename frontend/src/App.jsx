@@ -15,7 +15,7 @@ import Docs from './pages/Docs';
 
 const MainLayout = ({ children }) => {
   return (
-    <div className="min-h-screen bg-slate-950 dark:bg-slate-950 light:bg-slate-50 bg-tactical-grid dark:text-slate-100 light:text-slate-900 flex flex-col transition-colors">
+    <div className="min-h-screen bg-slate-50 bg-tactical-grid text-slate-900 flex flex-col">
       <Navbar />
       <div className="flex flex-1">
         <Sidebar />

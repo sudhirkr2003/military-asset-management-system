@@ -54,19 +54,6 @@ const Navbar = () => {
 
         {/* Right Action & User Bar */}
         <div className="flex items-center gap-3">
-          {/* Theme Switcher Toggle */}
-          <button
-            onClick={toggleTheme}
-            style={{ 
-              backgroundColor: isDark ? '#0f172a' : '#f1f5f9',
-              borderColor: isDark ? '#1e293b' : '#cbd5e1',
-              color: isDark ? '#fbbf24' : '#4f46e5'
-            }}
-            className="p-2 rounded-xl border transition-colors shadow-sm"
-            title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-          >
-            {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
 
           <NavLink
             to="/docs"
