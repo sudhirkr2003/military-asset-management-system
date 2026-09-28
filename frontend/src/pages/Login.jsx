@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
-import { Shield, Lock, User, ArrowRight, AlertCircle, Key, Sun, Moon } from 'lucide-react';
+import { Shield, Lock, User, ArrowRight, AlertCircle, Sun, Moon } from 'lucide-react';
 
 const Login = () => {
-  const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('Admin@123');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { login, loading } = useAuth();
   const { isDark, toggleTheme } = useTheme();
@@ -24,11 +24,6 @@ const Login = () => {
     } else {
       setError(result.error);
     }
-  };
-
-  const handleDemoSelect = (u, p) => {
-    setUsername(u);
-    setPassword(p);
   };
 
   return (
@@ -145,61 +140,6 @@ const Login = () => {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </form>
-
-          {/* Quick Demo Accounts Selection Cards */}
-          <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
-            <div 
-              style={{ color: isDark ? '#94a3b8' : '#475569' }}
-              className="text-[11px] font-mono uppercase font-bold text-center mb-3 flex items-center justify-center gap-1.5"
-            >
-              <Key className="w-3.5 h-3.5 text-amber-500" />
-              Demo Role Accounts (Click to Fill)
-            </div>
-
-            <div className="grid grid-cols-3 gap-2">
-              <button
-                type="button"
-                onClick={() => handleDemoSelect('admin', 'Admin@123')}
-                style={{ 
-                  backgroundColor: username === 'admin' ? (isDark ? '#78350f' : '#fef3c7') : (isDark ? '#090d16' : '#f8fafc'),
-                  borderColor: username === 'admin' ? '#f59e0b' : (isDark ? '#1e293b' : '#e2e8f0'),
-                  color: isDark ? '#f8fafc' : '#0f172a'
-                }}
-                className="p-2.5 rounded-xl text-left border transition-all hover:border-amber-500 shadow-sm"
-              >
-                <div className="text-[11px] font-extrabold text-amber-600 dark:text-amber-400">Admin</div>
-                <div className="text-[9px] font-mono font-semibold opacity-80 mt-0.5">Full Access</div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleDemoSelect('commander_alpha', 'Commander@123')}
-                style={{ 
-                  backgroundColor: username === 'commander_alpha' ? (isDark ? '#312e81' : '#e0e7ff') : (isDark ? '#090d16' : '#f8fafc'),
-                  borderColor: username === 'commander_alpha' ? '#6366f1' : (isDark ? '#1e293b' : '#e2e8f0'),
-                  color: isDark ? '#f8fafc' : '#0f172a'
-                }}
-                className="p-2.5 rounded-xl text-left border transition-all hover:border-indigo-500 shadow-sm"
-              >
-                <div className="text-[11px] font-extrabold text-indigo-600 dark:text-indigo-400">Commander</div>
-                <div className="text-[9px] font-mono font-semibold opacity-80 mt-0.5">Base Alpha</div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleDemoSelect('logistics', 'Logistics@123')}
-                style={{ 
-                  backgroundColor: username === 'logistics' ? (isDark ? '#064e3b' : '#d1fae5') : (isDark ? '#090d16' : '#f8fafc'),
-                  borderColor: username === 'logistics' ? '#10b981' : (isDark ? '#1e293b' : '#e2e8f0'),
-                  color: isDark ? '#f8fafc' : '#0f172a'
-                }}
-                className="p-2.5 rounded-xl text-left border transition-all hover:border-emerald-500 shadow-sm"
-              >
-                <div className="text-[11px] font-extrabold text-emerald-600 dark:text-emerald-400">Logistics</div>
-                <div className="text-[9px] font-mono font-semibold opacity-80 mt-0.5">Transfers</div>
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </div>

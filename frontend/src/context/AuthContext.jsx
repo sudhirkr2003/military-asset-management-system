@@ -40,24 +40,7 @@ export const AuthProvider = ({ children }) => {
       return { success: true, user: userData };
     } catch (error) {
       setLoading(false);
-      // Demo Mode Fallback if backend server is not running
-      const demoUsers = {
-        'admin': { userId: 1, username: 'admin', email: 'admin@test.com', fullName: 'Gen. Arthur Vance', role: 'ADMIN', baseId: null, baseName: 'All Bases (HQ)' },
-        'commander_alpha': { userId: 2, username: 'commander_alpha', email: 'commander@test.com', fullName: 'Col. Sarah Connor', role: 'BASE_COMMANDER', baseId: 1, baseName: 'Base Alpha' },
-        'logistics': { userId: 3, username: 'logistics', email: 'logistics@test.com', fullName: 'Maj. Roy Mustang', role: 'LOGISTICS_OFFICER', baseId: 1, baseName: 'Base Alpha' }
-      };
-
-      if (demoUsers[username] && (password === 'Admin@123' || password === 'Commander@123' || password === 'Logistics@123' || password === 'password')) {
-        const fallbackUser = demoUsers[username];
-        const dummyToken = 'demo-jwt-token-' + Date.now();
-        localStorage.setItem('token', dummyToken);
-        localStorage.setItem('user', JSON.stringify(fallbackUser));
-        setToken(dummyToken);
-        setUser(fallbackUser);
-        return { success: true, user: fallbackUser, isDemo: true };
-      }
-
-      const errorMessage = error.response?.data?.message || 'Invalid username or password';
+      const errorMessage = error.response?.data?.message || 'Server is not reachable. Please ensure the backend is running.';
       return { success: false, error: errorMessage };
     }
   };
