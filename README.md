@@ -1,134 +1,147 @@
-# Military Asset Management System
+# Military Asset Management System (MAMS)
 
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.4-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![React](https://img.shields.io/badge/React-18.3-blue.svg)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.4-purple.svg)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4.0-06B6D4.svg)](https://tailwindcss.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-336791.svg)](https://www.postgresql.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-A secure, role-based logistics management platform designed to track military assets, purchases, transfers, personnel assignments, operational expenditures, and multi-base closing balances.
+A defense-grade, role-based logistics command and inventory control platform designed to track military assets, acquisitions, inter-base transfers, personnel assignments, operational expenditures, and multi-base balance accounting.
+
+---
+
+## 🌐 Live Cloud Deployment
+
+| Service | Environment | Live URL |
+| :--- | :--- | :--- |
+| **Frontend Web App** | Render Static Site | [military-asset-management-system-frontend-zlcg.onrender.com](https://military-asset-management-system-frontend-zlcg.onrender.com) |
+| **Backend REST API** | Render Web Service (Docker) | [military-asset-management-system-backend-rx1w.onrender.com](https://military-asset-management-system-backend-rx1w.onrender.com) |
+| **Health Check (Uptime)** | Public Endpoint | [Backend Health Endpoint](https://military-asset-management-system-backend-rx1w.onrender.com/api/health) |
+| **API Specification** | JSON Endpoint | [API Documentation Docs](https://military-asset-management-system-backend-rx1w.onrender.com/api/docs) |
+| **Database** | Supabase Cloud | PostgreSQL with IPv4 Session Pooler |
 
 ---
 
 ## 🌟 Key Features
 
-- **Multi-Base Inventory Management**: Track active, available, assigned, and expended stock across bases (Base Alpha, Base Bravo, Base Charlie).
+- **Multi-Base Inventory Management**: Real-time asset tracking across defense commands:
+  - *Northern Command Base* (`NC-01`)
+  - *Western Air Command* (`WAC-02`)
+  - *Eastern Naval Command* (`ENC-03`)
+- **Equipment Categorization**: Full coverage across 5 tactical military categories:
+  - Tactical Transport Vehicles (`Units`)
+  - Standard Assault Rifles (`Units`)
+  - 5.56mm Ammunition (`Rounds`)
+  - Encrypted VHF Radios (`Sets`)
+  - Field Trauma Kits (`Kits`)
 - **Opening & Closing Balance Accounting**: Period-based balance calculations with exact inventory equations:
   $$\text{Closing Balance} = \text{Opening Balance} + \text{Purchases} + \text{Transfer In} - \text{Transfer Out} - \text{Expenditures}$$
-- **Interactive Net Movement Breakdown**: Clickable Net Movement modal detailing inflows and outflows.
-- **Transactional Inter-Base Transfers**: Atomic transfers (`@Transactional`) guaranteeing stock is deducted from source and added to destination without partial failures.
-- **Personnel Asset Assignments**: Assign equipment to officers with personnel IDs, track active assignments, and process returns.
-- **Expenditure Tracking**: Record operational consumption with real-time stock availability verification feedback.
+- **Interactive Net Movement Breakdown**: Modal detailing inflows, outflows, and net delta.
+- **Transactional Inter-Base Transfers**: Atomic inter-base transfers (`@Transactional`) guaranteeing stock deduction from source and increment at destination without race conditions.
+- **Personnel Asset Assignments**: Deploy assets to military personnel with service IDs, track active assignments, and process returns.
+- **Operational Expenditure Tracking**: Record ammo and medical kit consumption during drills/operations with live availability verification.
+- **High-Contrast Tactical Light Mode**: Clean, permanent daylight military dashboard theme with dynamic Recharts visual trends.
 - **Role-Based Access Control (RBAC)**: Fine-grained security for `ADMIN`, `BASE_COMMANDER`, and `LOGISTICS_OFFICER`.
-- **System Audit Logging**: Immutable security audit log tracking user actions, entity mutations, IP addresses, and timestamps.
-- **Swagger / OpenAPI 3.0 Documentation**: Interactive REST API sandbox.
-- **Tactical Dark Mode Dashboard**: Responsive UI with Recharts movement trends and stock distribution graphs.
+- **System Audit Logging**: Immutable security audit log tracking user mutations, IP addresses, and timestamps.
+- **Keep-Alive Public Health Check**: Dedicated `/api/health` endpoint for 24/7 uptime pinging via UptimeRobot to prevent cold starts.
 
 ---
 
 ## 🏗️ Architecture
 
 ```
-                    ┌──────────────────────┐
-                    │       Browser        │
-                    │   React Web App      │
-                    └──────────┬───────────┘
-                               │
-                         HTTPS / REST
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │      Spring Boot     │
-                    │       Backend        │
-                    │                      │
-                    │  Controllers         │
-                    │  Services            │
-                    │  Security / JWT      │
-                    │  Repositories        │
-                    └──────────┬───────────┘
-                               │
-                         JPA / Hibernate
-                               │
-                               ▼
-                    ┌──────────────────────┐
-                    │      PostgreSQL      │
-                    │       Database       │
-                    └──────────┬───────────┘
+                    ┌─────────────────────────────────┐
+                    │      React 18 / Vite SPA        │
+                    │   Tactical Light UI (Tailwind)  │
+                    └────────────────┬────────────────┘
+                                     │
+                               HTTPS / REST
+                                     │
+                                     ▼
+                    ┌─────────────────────────────────┐
+                    │      Spring Boot 3.2 (Java 17)  │
+                    │  Controllers | Services | JPA   │
+                    │  Spring Security 6 (Stateless)  │
+                    │  Docker Container on Render     │
+                    └────────────────┬────────────────┘
+                                     │
+                             JDBC (IPv4 Pooler)
+                                     │
+                                     ▼
+                    ┌─────────────────────────────────┐
+                    │     Supabase PostgreSQL DB      │
+                    │  Bases, Assets, Purchases,      │
+                    │  Transfers, Assignments, Logs   │
+                    └─────────────────────────────────┘
 ```
 
 ---
 
-## 🔑 Demo Test Credentials
+## 🔑 Default Credentials
 
 | Role | Username | Password | Base Access |
 | :--- | :--- | :--- | :--- |
 | **Admin** | `admin` | `Admin@123` | All Bases (HQ) |
-| **Base Commander** | `commander_alpha` | `Commander@123` | Base Alpha |
-| **Logistics Officer** | `logistics` | `Logistics@123` | Base Alpha |
 
-> *Note: On the login screen, you can click any of the preset account cards to auto-fill credentials!*
+> *Note: New commanders and officers can be assigned their respective base permissions via the database or user management.*
 
 ---
 
-## 🚀 Quick Start (Running Locally)
+## 📡 REST API Reference
+
+| Method | Endpoint | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/health` | **Public** | Instant 200 OK service health monitoring (for UptimeRobot) |
+| `POST` | `/api/auth/login` | **Public** | Authenticate user credentials & return JWT bearer token |
+| `GET` | `/api/docs` | **Public** | Retrieve system API endpoints specification JSON |
+| `GET` | `/api/dashboard` | Authenticated | Calculate balances, KPI cards, and movement trends |
+| `GET` | `/api/purchases` | Authenticated | Get purchase acquisition history |
+| `POST` | `/api/purchases` | Admin / Logistics / Commander | Record new asset purchase and increment base stock |
+| `GET` | `/api/transfers` | Authenticated | Inter-base transfer timeline history |
+| `POST` | `/api/transfers` | Admin / Logistics / Commander | Initiate atomic inter-base asset transfer |
+| `GET` | `/api/assignments` | Authenticated | Personnel equipment deployment records |
+| `POST` | `/api/assignments` | Admin / Commander | Deploy asset to officer with personnel ID |
+| `PUT` | `/api/assignments/{id}/return` | Admin / Commander | Return assigned asset back to base available stock |
+| `GET` | `/api/expenditures` | Authenticated | Operational asset consumption history |
+| `POST` | `/api/expenditures` | Admin / Logistics / Commander | Record operational asset expenditure |
+| `GET` | `/api/bases` | Authenticated | List all active military bases |
+| `GET` | `/api/equipment-types` | Authenticated | List all tactical equipment categories |
+| `GET` | `/api/assets` | Authenticated | Current asset inventory matrix across bases |
+
+---
+
+## 🚀 Running Locally
 
 ### Prerequisites
-- **Java 17** & **Apache Maven 3.9+**
+- **Java 17+** & **Apache Maven 3.9+**
 - **Node.js 18+** & **npm**
 
-### Step 1: Start Backend API
+### Step 1: Backend Setup
 ```bash
 cd backend
 mvn spring-boot:run
 ```
-*The Spring Boot server starts at `http://localhost:8080`. Seed data is auto-populated.*
+*Server starts on `http://localhost:8080`.*
 
-### Step 2: Start React Frontend
+### Step 2: Frontend Setup
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-*Open `http://localhost:5173` in your browser.*
+*Web app starts on `http://localhost:5173`.*
 
 ---
 
-## 📁 Repository Structure
+## 🛠️ Environment Configuration
 
-```
-military-asset-management-system/
-│
-├── backend/                  # Spring Boot 3 Java 17 Project
-│   ├── src/main/java/com/military/assetmanagement/
-│   │   ├── config/           # Security, OpenAPI, DataSeeder
-│   │   ├── controller/       # REST API Controllers
-│   │   ├── dto/              # Request / Response DTOs
-│   │   ├── entity/           # JPA Entities
-│   │   ├── exception/        # Global Exception Handler
-│   │   ├── repository/       # Data JPA Repositories
-│   │   ├── security/         # JWT Filters & UserDetailsService
-│   │   └── service/          # Core Business Services
-│   └── pom.xml
-│
-├── frontend/                 # Vite + React + Tailwind CSS Web App
-│   ├── src/
-│   │   ├── components/       # Reusable UI Components & Modals
-│   │   ├── context/          # Auth Context & Theme Context
-│   │   ├── pages/            # Dashboard, Purchases, Transfers, Assignments & Expenditures, Docs, Login
-│   │   ├── services/         # Axios API Services
-│   │   └── utils/            # RBAC Helpers
-│   └── vite.config.js
-│
-└── README.md
-```
+### Backend (`application.yml` or Cloud Environment Variables)
+- `SPRING_DATASOURCE_URL`: PostgreSQL JDBC URL (e.g. `jdbc:postgresql://<host>:5432/<dbname>?sslmode=require`)
+- `SPRING_DATASOURCE_USERNAME`: Database username
+- `SPRING_DATASOURCE_PASSWORD`: Database password
+- `APP_JWT_SECRET`: 256-bit Hex secret key for signing tokens
+- `CORS_ALLOWED_ORIGINS`: Comma-separated allowed frontend origins
 
----
-
-## 🎥 Suggested 3-5 Minute Video Walkthrough Script
-
-1. **0:00–0:30 (Problem & Overview)**: Explain the military asset management system goals across multiple bases.
-2. **0:30–1:00 (Architecture & Security)**: Highlight 3-tier architecture (React → Spring Boot → PostgreSQL), JWT auth, and RBAC.
-3. **1:00–1:40 (Dashboard & Net Movement)**: Demo login as Admin, filter controls, KPI cards, and click the **Net Movement Modal** breakdown.
-4. **1:40–2:20 (Purchase Transaction)**: Record a new purchase and show automatic stock level increment.
-5. **2:20–3:00 (Inter-Base Transfer)**: Execute transfer from Base Alpha to Base Bravo. Show visual flow card update.
-6. **3:00–3:30 (Assignments & Expenditures)**: Assign asset to personnel, demonstrate return asset flow, and record expenditure with stock validation check.
-7. **3:30–4:00 (Audit Logs & Swagger)**: Show immutable audit trail table and Swagger UI at `/swagger-ui.html`.
+### Frontend (`.env` or Cloud Environment Variables)
+- `VITE_API_BASE_URL`: Full backend API base URL (e.g. `https://military-asset-management-system-backend-rx1w.onrender.com/api`)

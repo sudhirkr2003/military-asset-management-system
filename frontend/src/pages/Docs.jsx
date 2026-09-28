@@ -37,6 +37,7 @@ const Docs = () => {
             { method: 'GET', path: '/api/bases', frontendRoute: '/dashboard', role: 'AUTHENTICATED', description: 'List all military bases for dropdown filtering & selection' },
             { method: 'GET', path: '/api/equipment-types', frontendRoute: '/dashboard', role: 'AUTHENTICATED', description: 'List all equipment categories for dropdown filtering & selection' },
             { method: 'GET', path: '/api/assets', frontendRoute: '/dashboard', role: 'AUTHENTICATED', description: 'List current stock balance levels per base & category' },
+            { method: 'GET', path: '/api/health', frontendRoute: '/docs', role: 'PUBLIC', description: 'Check live backend service health status (used for UptimeRobot monitoring)' },
             { method: 'GET', path: '/api/docs', frontendRoute: '/docs', role: 'PUBLIC', description: 'Get system API documentation JSON' }
           ]
         });

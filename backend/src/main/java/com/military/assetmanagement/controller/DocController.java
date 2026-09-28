@@ -40,6 +40,7 @@ public class DocController {
                 createEndpoint("GET", "/api/bases", "/dashboard", "AUTHENTICATED", "List all military bases for dropdown filtering & selection"),
                 createEndpoint("GET", "/api/equipment-types", "/dashboard", "AUTHENTICATED", "List all equipment categories for dropdown filtering & selection"),
                 createEndpoint("GET", "/api/assets", "/dashboard", "AUTHENTICATED", "List current stock balance levels per base & category"),
+                createEndpoint("GET", "/api/health", "/docs", "PUBLIC", "Check live backend service health status (used for UptimeRobot monitoring)"),
                 createEndpoint("GET", "/api/docs", "/docs", "PUBLIC", "Get system API documentation JSON")
         );
 
