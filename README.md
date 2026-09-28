@@ -21,6 +21,9 @@ A defense-grade, role-based logistics command and inventory control platform des
 | **API Specification** | JSON Endpoint | [API Documentation Docs](https://military-asset-management-system-backend-rx1w.onrender.com/api/docs) |
 | **Database** | Supabase Cloud | PostgreSQL with IPv4 Session Pooler |
 
+> ⚠️ **Important Cloud Hosting Notice (Render Free Tier Cold-Start)**:  
+> The backend service is hosted on Render's free tier. After 15 minutes of inactivity, the instance automatically spins down into a sleep state. The first inbound request (e.g. initial login) may take **1 to 2 minutes** to wake up the server container. Subsequent requests will respond with standard fast latency.
+
 ---
 
 ## 🌟 Key Features
@@ -83,8 +86,8 @@ A defense-grade, role-based logistics command and inventory control platform des
 | Role | Username | Password | Base Access |
 | :--- | :--- | :--- | :--- |
 | **Admin** | `admin` | `Admin@123` | All Bases (HQ) |
-
-> *Note: New commanders and officers can be assigned their respective base permissions via the database or user management.*
+| **Base Commander** | `commander` | `Commander@123` | Northern Command Base (`NC-01`) |
+| **Logistics Officer** | `logistics` | `Logistics@123` | Northern Command Base (`NC-01`) |
 
 ---
 
