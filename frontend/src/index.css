@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  html.dark body {
+    background-color: #0b0f19;
+    color: #f1f5f9;
+  }
+
+  html.light body,
+  html:not(.dark) body {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+html.dark ::-webkit-scrollbar-track { background: #0b0f19; }
+html.dark ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }
+html:not(.dark) ::-webkit-scrollbar-track { background: #f8fafc; }
+html:not(.dark) ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+
+/* DARK MODE STYLES */
+html.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html.dark .bg-tactical-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* LIGHT MODE COMPLETE OVERRIDES - ABSOLUTELY NO BLACK BACKGROUNDS IN LIGHT MODE */
+html:not(.dark),
+html.light {
+  color-scheme: light;
+}
+
+html:not(.dark) .bg-tactical-grid,
+html.light .bg-tactical-grid {
+  background-color: #ffffff !important;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Force light background on all panels, containers, cards, headers, asides */
+html:not(.dark) .glass-panel,
+html.light .glass-panel,
+html:not(.dark) header,
+html.light header,
+html:not(.dark) aside,
+html.light aside,
+html:not(.dark) .bg-slate-950,
+html.light .bg-slate-950,
+html:not(.dark) .bg-slate-900,
+html.light .bg-slate-900,
+html:not(.dark) .bg-slate-800,
+html.light .bg-slate-800,
+html:not(.dark) [class*="bg-slate-900"],
+html.light [class*="bg-slate-900"],
+html:not(.dark) [class*="bg-slate-950"],
+html.light [class*="bg-slate-950"] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* Sub-containers and inner headers in light mode */
+html:not(.dark) .bg-slate-100,
+html.light .bg-slate-100,
+html:not(.dark) .bg-slate-50,
+html.light .bg-slate-50 {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* FORCE HIGH CONTRAST DARK TEXT IN LIGHT MODE */
+html:not(.dark) h1,
+html.light h1,
+html:not(.dark) h2,
+html.light h2,
+html:not(.dark) h3,
+html.light h3,
+html:not(.dark) h4,
+html.light h4,
+html:not(.dark) .text-slate-100,
+html.light .text-slate-100,
+html:not(.dark) .text-slate-200,
+html.light .text-slate-200,
+html:not(.dark) .text-slate-300,
+html.light .text-slate-300,
+html:not(.dark) .text-slate-900,
+html.light .text-slate-900 {
+  color: #0f172a !important;
+}
+
+html:not(.dark) p,
+html.light p,
+html:not(.dark) span.text-slate-400,
+html.light span.text-slate-400,
+html:not(.dark) .text-slate-400,
+html.light .text-slate-400 {
+  color: #334155 !important;
+}
+
+html:not(.dark) .text-slate-500,
+html.light .text-slate-500,
+html:not(.dark) .text-slate-600,
+html.light .text-slate-600 {
+  color: #475569 !important;
+}
+
+/* INPUTS, SELECTS, TEXTAREAS IN LIGHT MODE */
+html:not(.dark) input,
+html.light input,
+html:not(.dark) select,
+html.light select,
+html:not(.dark) textarea,
+html.light textarea {
+  background-color: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+html:not(.dark) input::placeholder,
+html.light input::placeholder,
+html:not(.dark) textarea::placeholder,
+html.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* TABLE STYLES IN LIGHT MODE */
+html:not(.dark) table thead,
+html.light table thead {
+  background-color: #f1f5f9 !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+}
+
+html:not(.dark) table thead th,
+html.light table thead th {
+  color: #1e293b !important;
+  font-weight: 800 !important;
+}
+
+html:not(.dark) table tbody tr,
+html.light table tbody tr {
+  border-color: #e2e8f0 !important;
+  background-color: #ffffff !important;
+}
+
+html:not(.dark) table tbody tr:hover,
+html.light table tbody tr:hover {
+  background-color: #f8fafc !important;
+}
+
+html:not(.dark) table tbody td,
+html.light table tbody td {
+  color: #0f172a !important;
+}
+
+/* MODALS IN LIGHT MODE */
+html:not(.dark) .fixed.inset-0,
+html.light .fixed.inset-0 {
+  background-color: rgba(15, 23, 42, 0.4) !important;
+}
