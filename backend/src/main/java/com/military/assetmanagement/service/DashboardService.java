@@ -25,21 +25,32 @@ public class DashboardService {
 
     public DashboardSummaryDto getDashboardSummary(Long baseId, Long equipmentTypeId, LocalDate fromDate, LocalDate toDate) {
         try {
-            if (fromDate == null) {
-                fromDate = LocalDate.now().minusDays(30);
-            }
-            if (toDate == null) {
-                toDate = LocalDate.now();
-            }
+            final LocalDate effectiveFrom = fromDate != null ? fromDate : LocalDate.now().minusDays(30);
+            final LocalDate effectiveTo = toDate != null ? toDate : LocalDate.now();
 
-            List<Purchase> purchasesList = purchaseRepository.findFilteredPurchases(baseId, equipmentTypeId, fromDate, toDate);
-            if (purchasesList == null) purchasesList = Collections.emptyList();
+            List<Purchase> allPurchases = purchaseRepository.findAll();
+            List<Purchase> purchasesList = (allPurchases != null ? allPurchases : Collections.<Purchase>emptyList()).stream()
+                    .filter(p -> p != null)
+                    .filter(p -> baseId == null || (p.getBase() != null && Objects.equals(p.getBase().getId(), baseId)))
+                    .filter(p -> equipmentTypeId == null || (p.getEquipmentType() != null && Objects.equals(p.getEquipmentType().getId(), equipmentTypeId)))
+                    .filter(p -> p.getPurchaseDate() != null && !p.getPurchaseDate().isBefore(effectiveFrom) && !p.getPurchaseDate().isAfter(effectiveTo))
+                    .toList();
 
-            List<Transfer> transfersList = transferRepository.findFilteredTransfers(baseId, equipmentTypeId, fromDate, toDate);
-            if (transfersList == null) transfersList = Collections.emptyList();
+            List<Transfer> allTransfers = transferRepository.findAll();
+            List<Transfer> transfersList = (allTransfers != null ? allTransfers : Collections.<Transfer>emptyList()).stream()
+                    .filter(t -> t != null)
+                    .filter(t -> baseId == null || (t.getFromBase() != null && Objects.equals(t.getFromBase().getId(), baseId)) || (t.getToBase() != null && Objects.equals(t.getToBase().getId(), baseId)))
+                    .filter(t -> equipmentTypeId == null || (t.getEquipmentType() != null && Objects.equals(t.getEquipmentType().getId(), equipmentTypeId)))
+                    .filter(t -> t.getTransferDate() != null && !t.getTransferDate().isBefore(effectiveFrom) && !t.getTransferDate().isAfter(effectiveTo))
+                    .toList();
 
-            List<Expenditure> expendituresList = expenditureRepository.findFilteredExpenditures(baseId, equipmentTypeId, fromDate, toDate);
-            if (expendituresList == null) expendituresList = Collections.emptyList();
+            List<Expenditure> allExpenditures = expenditureRepository.findAll();
+            List<Expenditure> expendituresList = (allExpenditures != null ? allExpenditures : Collections.<Expenditure>emptyList()).stream()
+                    .filter(e -> e != null)
+                    .filter(e -> baseId == null || (e.getAsset() != null && e.getAsset().getBase() != null && Objects.equals(e.getAsset().getBase().getId(), baseId)))
+                    .filter(e -> equipmentTypeId == null || (e.getEquipmentType() != null && Objects.equals(e.getEquipmentType().getId(), equipmentTypeId)))
+                    .filter(e -> e.getExpenditureDate() != null && !e.getExpenditureDate().isBefore(effectiveFrom) && !e.getExpenditureDate().isAfter(effectiveTo))
+                    .toList();
 
             List<Asset> currentAssets = assetRepository.findAll();
             if (currentAssets == null) currentAssets = Collections.emptyList();
@@ -136,7 +147,7 @@ public class DashboardService {
             });
 
             List<DashboardSummaryDto.MovementTrendPoint> movementTrends = generateTrendPoints(
-                    purchasesList, transfersList, expendituresList, fromDate, toDate);
+                    purchasesList, transfersList, expendituresList, effectiveFrom, effectiveTo);
 
             return DashboardSummaryDto.builder()
                     .openingBalance(openingBalance)
