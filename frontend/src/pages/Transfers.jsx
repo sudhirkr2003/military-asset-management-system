@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getErrorMessage } from '../utils/errorHandler';
 import { getTransfers, createTransfer } from '../services/transferService';
 import { getBases, getEquipmentTypes, getAssets } from '../services/assetService';
 import { useAuth } from '../context/AuthContext';
@@ -52,7 +53,7 @@ const Transfers = () => {
       }
       if (eList.length > 0) setFormData(prev => ({ ...prev, equipmentTypeId: eList[0].id }));
     } catch (err) {
-      console.error(err);
+      setError(getErrorMessage(err, 'Failed to load transfer records.'));
     } finally {
       setLoading(false);
     }
@@ -96,7 +97,7 @@ const Transfers = () => {
       setIsModalOpen(false);
       loadData();
     } catch (err) {
-      setError(err.response?.data?.message || 'Transfer failed. Check asset stock availability.');
+      setError(getErrorMessage(err, 'Transfer operation failed. Please verify stock availability.'));
     } finally {
       setSubmitting(false);
     }

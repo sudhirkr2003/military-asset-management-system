@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getErrorMessage } from '../utils/errorHandler';
 import { getAssignments, createAssignment } from '../services/assignmentService';
 import { getExpenditures, createExpenditure } from '../services/expenditureService';
 import { getAssets } from '../services/assetService';
@@ -59,7 +60,7 @@ const AssignmentsExpenditures = ({ initialTab = 'assignments' }) => {
         setExpendForm(prev => ({ ...prev, assetId: assetList[0].id }));
       }
     } catch (err) {
-      console.error(err);
+      setError(getErrorMessage(err, 'Failed to load records.'));
     } finally {
       setLoading(false);
     }
@@ -84,7 +85,7 @@ const AssignmentsExpenditures = ({ initialTab = 'assignments' }) => {
       setIsAssignModalOpen(false);
       loadData();
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to assign asset.');
+      setError(getErrorMessage(err, 'Failed to create assignment. Please try again.'));
     } finally {
       setSubmitting(false);
     }
@@ -113,7 +114,7 @@ const AssignmentsExpenditures = ({ initialTab = 'assignments' }) => {
       setIsExpendModalOpen(false);
       loadData();
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to record expenditure.');
+      setError(getErrorMessage(err, 'Failed to record expenditure. Please try again.'));
     } finally {
       setSubmitting(false);
     }

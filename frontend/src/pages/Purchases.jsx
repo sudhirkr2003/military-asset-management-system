@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getErrorMessage } from '../utils/errorHandler';
 import { getPurchases, createPurchase } from '../services/purchaseService';
 import { getBases, getEquipmentTypes } from '../services/assetService';
 import { useAuth } from '../context/AuthContext';
@@ -44,7 +45,7 @@ const Purchases = () => {
       if (bList.length > 0) setFormData(prev => ({ ...prev, baseId: bList[0].id }));
       if (eList.length > 0) setFormData(prev => ({ ...prev, equipmentTypeId: eList[0].id }));
     } catch (err) {
-      console.error(err);
+      setError(getErrorMessage(err, 'Failed to load purchase records.'));
     } finally {
       setLoading(false);
     }
@@ -71,7 +72,7 @@ const Purchases = () => {
       setIsModalOpen(false);
       loadData();
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to record purchase transaction');
+      setError(getErrorMessage(err, 'Failed to record purchase transaction.'));
     } finally {
       setSubmitting(false);
     }

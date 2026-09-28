@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import api from '../services/api';
+import { getErrorMessage } from '../utils/errorHandler';
 
 const AuthContext = createContext(null);
 
@@ -40,7 +41,7 @@ export const AuthProvider = ({ children }) => {
       return { success: true, user: userData };
     } catch (error) {
       setLoading(false);
-      const errorMessage = error.response?.data?.message || 'Server is not reachable. Please ensure the backend is running.';
+      const errorMessage = getErrorMessage(error, 'Authentication failed. Please check your credentials.');
       return { success: false, error: errorMessage };
     }
   };
